@@ -1,4 +1,4 @@
-package com.mysite.sbb.repository;
+package com.mysite.boardX.repository;
 
 import java.time.LocalDateTime;
 

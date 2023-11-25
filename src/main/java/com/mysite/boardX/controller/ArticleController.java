@@ -1,10 +1,10 @@
-package com.mysite.sbb.controller;
+package com.mysite.boardX.controller;
 
-import com.mysite.sbb.dto.CommentForm;
-import com.mysite.sbb.dto.ArticleForm;
-import com.mysite.sbb.repository.Article;
-import com.mysite.sbb.repository.ArticleRepository;
-import com.mysite.sbb.service.ArticleService;
+import com.mysite.boardX.dto.CommentForm;
+import com.mysite.boardX.dto.ArticleForm;
+import com.mysite.boardX.repository.Article;
+import com.mysite.boardX.repository.ArticleRepository;
+import com.mysite.boardX.service.ArticleService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -74,11 +74,11 @@ public class ArticleController {
             this.articleService.edit(id, articleForm.getSubject(), articleForm.getContent(), articleForm.getUserName()); //수정
             return "redirect:/article/list"; // 질문 저장후 질문목록으로 이동
         } else { //비밀번호가 다르다면
-            return "redirect:/article/edit/longPassword/{id}"; // "/article/edit/longpassword/{id}로 리다이렉트"
+            return "redirect:/article/edit/wrongPassword/{id}"; // "/article/edit/wrongPassword/{id}로 리다이렉트"
         }
     }
 
-    @GetMapping("/edit/longPassword/{id}") //비밀번호가 틀렸을 경우
+    @GetMapping("/edit/wrongPassword/{id}") //비밀번호가 틀렸을 경우
     //Model 객체에 값을 담아두면 템플릿에서 그 값을 사용할 수 있음
     //Model 객체는 따로 내가 생성하지 않더라도 컨트롤러 메서드 매개변수로 지정만 해두면 스프링부트가 자동으로 Model 객체를 생성한다.
     public String articleEditWrongPassword(Model model, @PathVariable("id") Integer id, ArticleForm articleForm) {
@@ -103,12 +103,12 @@ public class ArticleController {
             this.articleService.delete(id); //서비스의 delete 함수 실행
             return "redirect:/article/list"; // 질문 저장후 질문목록으로 이동
         }else {
-            return "redirect:/article/delete/longPassword/{id}"; // 질문 저장후 질문목록으로 이동
+            return "redirect:/article/delete/wrongPassword/{id}"; // 질문 저장후 질문목록으로 이동
         }
 
     }
 
-    @GetMapping("/delete/longPassword/{id}")
+    @GetMapping("/delete/wrongPassword/{id}")
     public String articleDeleteWrongPassword(Model model, @PathVariable("id") Integer id, ArticleForm articleForm) {
         Article article = this.articleService.getArticle(id);
         String wrongPassword = "비밀번호가 틀렸습니다.";

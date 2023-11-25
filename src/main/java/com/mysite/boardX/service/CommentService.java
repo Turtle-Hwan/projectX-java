@@ -1,9 +1,9 @@
-package com.mysite.sbb.service;
+package com.mysite.boardX.service;
 
-import com.mysite.sbb.DataNotFoundException;
-import com.mysite.sbb.repository.Comment;
-import com.mysite.sbb.repository.Article;
-import com.mysite.sbb.repository.CommentRepository;
+import com.mysite.boardX.DataNotFoundException;
+import com.mysite.boardX.repository.Comment;
+import com.mysite.boardX.repository.Article;
+import com.mysite.boardX.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

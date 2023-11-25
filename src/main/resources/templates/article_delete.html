@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container">
     <h6 class="my-3 pb-2" style="color: red;" th:text="${wrongPassword}"></h6>
-    <h2 class="my-3 border-bottom pb-2">게시글 삭제</h2>
+    <h5 class="my-3 border-bottom pb-2">❌게시글 삭제❌</h5>
     <h6 class="my-3 pb-2">삭제하시려면 비밀번호를 입력하세요.</h6>
     <form th:action="@{|/article/delete/${article.id}|}" th:object="${articleForm}" method="post">
         <!--    <input type="hidden" name="_method" value="put" />-->
@@ -9,23 +9,25 @@
         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
             <input type="text" name="subject" class="form-control" placeHolder="제목" id="postTitle"
-                   maxlength="200" required oninput="countLength(200, this)" th:value="${article.subject}">
+                   maxlength="200" required oninput="countLength(200, this)" th:value="${article.subject}" disabled readonly>
             <!--th:field="*{subject}"??-->
         </div>
-        <div class="mb-3">
+        <div class="row mb-3">
+        <div class="col-md-8">
             <label for="userName" class="form-label">작성자</label>
             <input type="text" name="userName" class="form-control" placeHolder="작성자" id="postWriter"
-                   maxlength="20" required oninput="countLength(20, this)" th:value="${article.userName}">
+                   maxlength="20" required oninput="countLength(20, this)" th:value="${article.userName}" disabled readonly>
         </div>
-        <div class="mb-3">
+        <div class="col-md-4">
             <label for="password" class="form-label">비밀번호</label>
-            <input type="password" name="password" class="password" placeHolder="비밀번호" id="postPassword"
+            <input type="password" name="password" class="form-control" placeHolder="비밀번호" id="postPassword"
                    maxlength="10" required oninput="countLength(10, this)">
+        </div>
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">내용</label>
-            <textarea name="content" class="form-control" placeHolder="내용을 입력해 주세요"  rows="10" th:text="${article.content}"></textarea>
+            <textarea name="content" class="form-control" placeHolder="내용을 입력해 주세요"  rows="10" th:text="${article.content}" disabled readonly></textarea>
         </div>
-        <button type="submit" class="write">삭제하기</button>
+        <button type="submit" class="write btn-delete" style="width:100%">삭제하기</button>
     </form>
 </div>

@@ -1,4 +1,4 @@
-package com.mysite.sbb;
+package com.mysite.boardX;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

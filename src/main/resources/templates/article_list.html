@@ -1,42 +1,50 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
     <!-- 글 작성 버튼 -->
-    <div class="header">
-        <a th:href="@{/article/create}"><button class="write" id="writeBtn">게시글 등록하기</button></a>
+    <div class="header" style="padding-top: 0px;">
+        <a th:href="@{/article/create}" style="margin: 20px;">
+            <button class="write btn-create" id="writeBtn" >게시글 등록하기</button>
+        </a>
     </div>
     <table class="table">
         <thead class="table-dark">
         <tr>
-            <th style="min-width:50px">번호</th>
-            <th style="min-width:50px">제목</th>
-            <th style="min-width:70px">작성자</th>
-            <th style="min-width:100px">작성일시</th>
-            <th style="min-width:50px">수정</th>
-            <th style="min-width:50px">삭제</th>
+            <th class="th_2w">번 호</th>
+            <th class="th_2w">제 목</th>
+            <th class="th_3w">작 성 자</th>
+            <th class="th_4w">작 성 일 시</th>
+            <th class="th_btn">수 정</th>
+            <th class="th_btn">삭 제</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="article, loop : ${paging}">
             <td id="index" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td>
-                <a id="subject" th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
-<!--                <span class="text-danger small ms-2"-->
-<!--                      th:if="${#lists.size(article.commentList) > 0}"-->
-<!--                      th:text="${#lists.size(article.commentList)}">-->
-<!--                </span>-->
+                <a id="subject" th:href="@{|/article/detail/${article.id}|}"
+                   th:text="${#strings.length(article.subject) > 20 ? #strings.substring(article.subject, 0, 20) + '...' : article.subject}"></a>
+                <span class="text-danger small ms-2"
+                      th:if="${#lists.size(article.commentList) > 0}"
+                      th:text="${#lists.size(article.commentList)}">
+                </span>
+
             </td>
             <td id="userName" th:text="${article.userName}"></td>
             <td id="content_hidden" hidden th:text="${article.content}"></td>
             <td th:text="${#temporals.format(article.createDate, 'yy-MM-dd HH:mm')}"></td>
-<!--            <td><button class="btn edit" id="editBtn" onclick="onEdit(this)">EDIT</button></td>-->
-            <td><a th:href="@{|/article/edit/${article.id}|}" th:text="수정"></a></td>
-            <td><a th:href="@{|/article/delete/${article.id}|}" th:text="삭제"></a></td>
+            <td><a th:href="@{|/article/edit/${article.id}|}"><button class="write btn-update" style="margin: 0">수정</button></a></td>
+            <td><a th:href="@{|/article/delete/${article.id}|}"><button class="write btn-delete" style="margin: 0">삭제</button></a></td>
         </tr>
         </tbody>
     </table>
     <!-- 페이징처리 시작 -->
     <div th:if="${!paging.isEmpty()}">
         <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${0}|}">
+                    <span>처음</span>
+                </a>
+            </li>
             <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
                 <a class="page-link"
                    th:href="@{|?page=${paging.number-1}|}">
@@ -47,16 +55,21 @@
                 th:if="${page >= paging.number-5 and page <= paging.number+5}"
                 th:classappend="${page == paging.number} ? 'active'"
                 class="page-item">
-                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
             </li>
             <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
                 <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
                     <span>다음</span>
                 </a>
             </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|?page=${paging.getTotalPages()-1}|}">
+                    <span>끝</span>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- 페이징처리 끝 -->
-
 </div>
 </html>

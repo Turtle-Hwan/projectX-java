@@ -1,12 +1,12 @@
-package com.mysite.sbb.service;
+package com.mysite.boardX.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.mysite.sbb.repository.Article;
-import com.mysite.sbb.repository.ArticleRepository;
+import com.mysite.boardX.repository.Article;
+import com.mysite.boardX.repository.ArticleRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import com.mysite.sbb.DataNotFoundException;
+import com.mysite.boardX.DataNotFoundException;
 
 @RequiredArgsConstructor
 @Service

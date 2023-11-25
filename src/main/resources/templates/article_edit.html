@@ -1,28 +1,30 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container">
-    <h6 class="my-3 pb-2" style="color: red;" th:text="${wrongPassword}"></h6>
-  <h5 class="my-3 border-bottom pb-2">게시글 수정</h5>
-    <h6 class="my-3 pb-2">수정하시고, 비밀번호를 입력하세요.</h6>
+  <h6 class="my-3 pb-2" style="color: red;" th:text="${wrongPassword}"></h6>
+  <h5 class="my-3 border-bottom pb-2">✅게시글 수정✅</h5>
+  <h6 class="my-3 pb-2">수정하시고, 비밀번호를 입력하세요.</h6>
   <form th:action="@{|/article/edit/${article.id}|}" th:object="${articleForm}" method="post">
     <div class="mb-3">
       <label for="subject" class="form-label">제목</label>
       <input type="text" name="subject" class="form-control" placeHolder="제목" id="postTitle"
-                   maxlength="200" required oninput="countLength(200, this)" th:value="${article.subject}">
+             maxlength="200" required oninput="countLength(200, this)" th:value="${article.subject}">
     </div>
-    <div class="mb-3">
+    <div class="row mb-3">
+    <div class="col-md-8">
       <label for="userName" class="form-label">작성자</label>
       <input type="text" name="userName" class="form-control" placeHolder="작성자" id="postWriter"
              maxlength="20" required oninput="countLength(20, this)" th:value="${article.userName}">
     </div>
-    <div class="mb-3">
+    <div class="col-md-4">
       <label for="password" class="form-label">비밀번호</label>
-      <input type="password" name="password" class="password" placeHolder="비밀번호" id="postPassword"
+      <input type="password" name="password" class="form-control" placeHolder="비밀번호" id="postPassword"
              maxlength="10" required oninput="countLength(10, this)">
     </div>
-      <div class="mb-3">
+    </div>
+    <div class="mb-3">
       <label for="content" class="form-label">내용</label>
       <textarea name="content" class="form-control" placeHolder="내용을 입력해 주세요"  rows="10" th:text="${article.content}"></textarea>
     </div>
-    <button type="submit" class="write">수정하기</button>
+    <button type="submit" class="write btn-update" style="width:100%">수정하기</button>
   </form>
 </div>

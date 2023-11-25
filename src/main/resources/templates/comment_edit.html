@@ -1,0 +1,25 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+  <div id="comment_container" class="card my-3" style="padding-left: 5%; padding-right: 5%;">
+    <h6 class="my-3 pb-2" style="color: red;" th:text="${wrongPassword}"></h6>
+    <h5 class="my-3 border-bottom pb-2">✅댓글 수정✅</h5>
+    <h6 class="my-3 pb-2">수정하시고, 비밀번호를 입력하세요.</h6>
+    <form th:action="@{|/comment/edit/${comment.id}|}" th:object="${commentForm}" method="post" class="row g-3">
+      <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+      <div class="col-md-8">
+        <label for="userName" class="form-label">댓글 작성자</label>
+        <input type="text" name="userName" class="form-control" placeHolder="댓글 작성자" id="postWriter"
+               maxlength="20" required oninput="countLength(20, this)" th:value="${comment.userName}">
+      </div>
+      <div class="col-md-4">
+        <label for="password" class="form-label">비밀번호</label>
+        <input type="password" th:field="*{password}" name="password" class="form-control" placeHolder="비밀번호" id="postPassword"
+               maxlength="10" required oninput="countLength(10, this)">
+      </div>
+      <div class="col-12">
+        <textarea name="content" rows="5" class="form-control" placeholder="댓글 내용을 입력해 주세요" th:text="${comment.content}"></textarea>
+      </div>
+      <button type="submit" class="write btn-update">댓글 수정하기</button>
+    </form>
+  </div>
+</div>

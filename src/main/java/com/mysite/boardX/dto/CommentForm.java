@@ -1,4 +1,4 @@
-package com.mysite.sbb.dto;
+package com.mysite.boardX.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 

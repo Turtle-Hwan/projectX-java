@@ -1,10 +1,10 @@
-package com.mysite.sbb.controller;
+package com.mysite.boardX.controller;
 
-import com.mysite.sbb.dto.CommentForm;
-import com.mysite.sbb.repository.Comment;
-import com.mysite.sbb.service.CommentService;
-import com.mysite.sbb.repository.Article;
-import com.mysite.sbb.service.ArticleService;
+import com.mysite.boardX.dto.CommentForm;
+import com.mysite.boardX.repository.Comment;
+import com.mysite.boardX.service.CommentService;
+import com.mysite.boardX.repository.Article;
+import com.mysite.boardX.service.ArticleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -55,11 +55,11 @@ public class CommentController {
             model.addAttribute("comment", comment);
             return String.format("redirect:/article/detail/%s", article.getId());
         } else { //비밀번호가 다르다면
-            return "redirect:/comment/edit/longPassword/{id}"; // "/comment/edit/longpassword/{id}로 리다이렉트"
+            return "redirect:/comment/edit/wrongPassword/{id}"; // "/comment/edit/wrongPassword/{id}로 리다이렉트"
         }
     }
 
-    @GetMapping("/edit/longPassword/{id}") //비밀번호가 틀렸을 경우
+    @GetMapping("/edit/wrongPassword/{id}") //비밀번호가 틀렸을 경우
     //Model 객체에 값을 담아두면 템플릿에서 그 값을 사용할 수 있음
     //Model 객체는 따로 내가 생성하지 않더라도 컨트롤러 메서드 매개변수로 지정만 해두면 스프링부트가 자동으로 Model 객체를 생성한다.
     public String articleEditWrongPassword(Model model, @PathVariable("id") Integer id, CommentForm commentForm) {
@@ -90,11 +90,11 @@ public class CommentController {
             return String.format("redirect:/article/detail/%s", article.getId());
         } //비번이 같다면 삭제 진행
         else {
-            return "redirect:/comment/delete/longPassword/{id}";
+            return "redirect:/comment/delete/wrongPassword/{id}";
         } //비번이 같지 않다면 메세지 출력
     }
 
-    @GetMapping("/delete/longPassword/{id}")
+    @GetMapping("/delete/wrongPassword/{id}")
     public String commentDeleteWrongPassword(Model model, @PathVariable("id") Integer id, CommentForm  commentForm) {
         String wrongPassword = "비밀번호가 틀렸습니다.";
         Comment comment = this.commentService.getComment(id);

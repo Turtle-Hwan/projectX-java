@@ -1,12 +1,59 @@
+
+/* 폰트 */
+@font-face {
+    font-family: 'JalnanGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     height: 100vh;
     align-items: center;
     justify-content: center;
+    font-family: 'JalnanGothic';
+    word-break: break-all;
   }
+
 a {
     color: black;
     text-decoration: none;
+}
+a:hover {
+    color: #6B84F3;
+    opacity: 1;
+}
+
+/* 마우스 호버 시 헤더 메뉴 속닥속닥 추가*/
+@media screen and (min-width: 600px) {
+    #header_bar:hover::before {
+       content: "속닥속닥";
+       position: absolute;
+       left: 15%;
+       font-size: 1.5rem;
+       opacity: 1;
+       transition: opacity 1s;
+    }
+    #header_bar:hover::after {
+      content: "속닥속닥";
+      position: absolute;
+      right: 15%;
+      font-size: 1.5rem;
+      opacity: 1;
+      transition: opacity 1s;
+    }
+}
+
+.page-item.active .page-link {
+    background-color: #6156F5;
+    border-color: #6156F5;
 }
   .header {
     display: flex;
@@ -26,16 +73,18 @@ a {
   }
 
   .write {
+    font-family: 'SUITE-Regular';
     background-color: #ffcb46;
     color: #fff;
     height: 38px;
     border-radius: 6px;
     border: none;
-    font-size: 18px;
     cursor: pointer;
     border-radius: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     margin-top:20px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   
   .text-list {
@@ -172,16 +221,6 @@ a {
     margin-bottom: 5px;
   }
   
-  #postTitle {
-    width: 100%;
-    padding: 3px 3px;
-  }
-  
-  #postWriter {
-    width: 100%;
-    padding: 3px 3px;
-  }
-  
   #postText {
     display: flex;
     width: 100%;
@@ -220,3 +259,82 @@ a {
     border-radius: 5px;
     height: 50vh;
   }
+
+/* 등록, 삭제, 수정 버튼별 css*/
+.btn-create {
+    background: -webkit-linear-gradient(28deg, rgb(127, 226, 238), rgb(83, 17, 249));
+    background: linear-gradient(28deg, rgb(127, 226, 238), rgb(83, 17, 249));
+}
+
+.btn-update {
+    background: -webkit-linear-gradient(25deg, rgb(87, 151, 124), rgb(26, 216, 45));
+    background: linear-gradient(25deg, rgb(87, 151, 124), rgb(26, 216, 45));
+}
+
+.btn-delete {
+  background: -webkit-linear-gradient(-131deg, rgb(255, 142, 68), rgb(199, 52, 52));
+  background: linear-gradient(-131deg, rgb(255, 142, 68), rgb(199, 52, 52));
+}
+
+.navbar {
+    background: -webkit-radial-gradient(rgb(212, 219, 255), rgb(219, 238, 255));
+    background: radial-gradient(rgb(212, 219, 255), rgb(219, 238, 255));
+}
+
+/* table 반응형 */
+.th_2w {
+    min-width:55px;
+}
+.th_3w {
+    min-width:75px;
+}
+.th_4w {
+    min-width:95px;
+}
+.th_btn {
+    min-width:75px;
+}
+
+#writeBtn {
+    padding-left: 60px;
+    padding-right: 60px;
+    margin: 0px;
+}
+
+td {
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 430px) {
+    table {
+        font-size: 0.75rem;
+    }
+    th {
+        font-size: 0.65rem;
+    }
+    .th_2w {
+        min-width:40px;
+    }
+    .th_3w {
+        min-width:55px;
+    }
+    .th_4w {
+        min-width:70px;
+    }
+    .th_btn {
+        min-width:50px;
+    }
+    .write {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 100%;
+    }
+
+    #writeBtn {
+        font-size: 0.75rem;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+
+}

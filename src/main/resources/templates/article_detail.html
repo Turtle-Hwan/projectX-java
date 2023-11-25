@@ -13,40 +13,52 @@
             </div>
         </div>
     </div>
+    <div class="text-end">
+    <a th:href="@{|/article/edit/${article.id}|}" style="margin-right: 20px;"><button class="write btn-update" style="margin: 0">게시글 수정</button></a>
+    <a th:href="@{|/article/delete/${article.id}|}"><button class="write btn-delete" style="margin: 0">게시글 삭제</button></a>
+    </div>
+    <!-- 답변 작성 -->
+    <div id="comment_container" class="card" style="padding-left: 5%; padding-right: 5%; margin-top:100px">
+    <h5 class="border-bottom my-3 py-2">🎇댓글을 남겨주세요🎇</h5>
+    <form th:action="@{|/comment/create/${article.id}|}" th:object="${commentForm}" method="post" class="row g-3">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="col-md-8">
+            <label for="subject" class="form-label">댓글 작성자</label>
+            <input type="text" th:field="*{userName}" name="userName" class="form-control" placeHolder="작성자" id="postWriter" maxlength="10" required oninput="countLength(10, this)">
+        </div>
+        <div class="col-md-4">
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" th:field="*{password}" name="password" class="form-control" placeHolder="비밀번호" id="postPassword" maxlength="10" required oninput="countLength(10, this)">
+        </div>
+        <div class="col-12">
+            <textarea th:field="*{content}" rows="5" class="form-control"></textarea>
+            <button type="submit" class="write btn-create">댓글 등록</button>
+        </div>
+    </form>
+    </div>
+
     <!-- 답변의 갯수 표시 -->
     <h5 class="border-bottom my-3 py-2"
         th:text="|${#lists.size(article.commentList)}개의 댓글이 있습니다.|"></h5>
     <!-- 답변 반복 시작 -->
-    <div class="card my-3" th:each="comment : ${article.commentList}">
-        <div class="badge bg-light text-dark p-2 text-start">
+    <div class="card my-3" style="padding-left: 5%; padding-right: 5%; font-family: 'SUITE-Regular';" th:each="comment : ${article.commentList}">
+        <div class="row g-3">
+            <div class="badge text-dark p-3 text-start col-md-6" style="font-size: 1em;">
             <div th:text="|작성자 : ${comment.userName}|"></div>
+        </div>
+            <div class="badge text-dark p-3 text-end col-md-6" style="font-size: 1em;">
+                <div th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+            </div>
         </div>
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;" th:text="${comment.content}"></div>
             <div class="d-flex justify-content-end">
-                <div class="badge bg-light text-dark p-2 text-start">
-                    <div th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></div>
-                </div>
-                <a th:href="@{|/comment/edit/${comment.id}|}">댓글 수정</a>
-                <a th:href="@{|/comment/delete/${comment.id}|}">댓글 삭제</a>
+                <a th:href="@{|/comment/edit/${comment.id}|}" style="margin-right: 20px"><button class="write btn-update">수정</button></a>
+                <a th:href="@{|/comment/delete/${comment.id}|}"><button class="write btn-delete">삭제</button></a>
             </div>
         </div>
     </div>
     <!-- 답변 반복 끝  -->
-    <!-- 답변 작성 -->
-    <h5 class="border-bottom my-3 py-2">🎇댓글을 남겨주세요🎇</h5>
-    <form th:action="@{|/comment/create/${article.id}|}" th:object="${commentForm}" method="post" class="my-3">
-        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-        <div class="mb-3">
-            <label for="subject" class="form-label">댓글 작성자</label>
-            <input type="text" th:field="*{userName}" name="userName" class="form-control" placeHolder="작성자" id="postWriter" maxlength="10" required oninput="countLength(10, this)">
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">비밀번호</label>
-            <input type="password" th:field="*{password}" name="password" class="password" placeHolder="비밀번호" id="postPassword" maxlength="10" required oninput="countLength(10, this)">
-        </div>
-        <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
-        <button type="submit" class="write">댓글등록</button>
-    </form>
+
 </div>
 </html>

@@ -1,4 +1,4 @@
-package com.mysite.sbb.repository;
+package com.mysite.boardX.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

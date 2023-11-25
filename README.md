@@ -1,5 +1,5 @@
 # projectX-java : 추억을 자바라! [최종 2등]
-## [배포 주소](turtle-hwan.iptime.org:38080)
+[배포 주소](http://turtle-hwan.iptime.org:38080)
 - Spring boot 활용한 CRUD 가능한 게시판
 
 ### 프로젝트 설계

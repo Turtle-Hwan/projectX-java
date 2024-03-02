@@ -1,4 +1,5 @@
 # projectX-java : 추억을 자바라! [최종 2등]
+[노션 기록](https://autumn-flier-d18.notion.site/W4-2735e0bf815b451b95a387ce00969037)  
 [배포 주소](http://turtle-hwan.iptime.org:38080)
 - Spring boot 활용한 CRUD 가능한 게시판
 
